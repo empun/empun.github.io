@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>EMPUN | A DEV BLOG 🐱</title>
-    <link>https://empun.github.io/</link>
-    <description>Recent content on EMPUN | A DEV BLOG 🐱</description>
+    <title>Javascript on EMPUN | A DEV BLOG 🐱</title>
+    <link>https://empun.github.io/categories/javascript/</link>
+    <description>Recent content in Javascript on EMPUN | A DEV BLOG 🐱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Sep 2021 16:58:36 +0700</lastBuildDate><atom:link href="https://empun.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 16:58:36 +0700</lastBuildDate><atom:link href="https://empun.github.io/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cara Menggunakan Typescript di NodeJS</title>
       <link>https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/</link>
@@ -15,8 +15,6 @@
       <guid>https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/</guid>
       <description>Menggunakan Typescript di NodeJS</description>
     </item>
-    
-    
     
   </channel>
 </rss>

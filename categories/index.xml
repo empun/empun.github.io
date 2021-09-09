@@ -5,6 +5,25 @@
     <link>https://empun.github.io/categories/</link>
     <description>Recent content in Categories on EMPUN | A DEV BLOG 🐱</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://empun.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Sep 2021 16:58:36 +0700</lastBuildDate><atom:link href="https://empun.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Javascript</title>
+      <link>https://empun.github.io/categories/javascript/</link>
+      <pubDate>Thu, 09 Sep 2021 16:58:36 +0700</pubDate>
+      
+      <guid>https://empun.github.io/categories/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nodejs</title>
+      <link>https://empun.github.io/categories/nodejs/</link>
+      <pubDate>Thu, 09 Sep 2021 16:58:36 +0700</pubDate>
+      
+      <guid>https://empun.github.io/categories/nodejs/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

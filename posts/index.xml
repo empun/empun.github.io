@@ -13,7 +13,7 @@
       <pubDate>Thu, 09 Sep 2021 16:58:36 +0700</pubDate>
       
       <guid>https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/</guid>
-      <description>Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.</description>
+      <description>Menggunakan Typescript di NodeJS</description>
     </item>
     
   </channel>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on EMPUN | A DEV BLOG 🐱</title>
+    <link>https://empun.github.io/posts/</link>
+    <description>Recent content in Posts on EMPUN | A DEV BLOG 🐱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Sep 2021 16:58:36 +0700</lastBuildDate><atom:link href="https://empun.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cara Menggunakan Typescript di NodeJS</title>
+      <link>https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/</link>
+      <pubDate>Thu, 09 Sep 2021 16:58:36 +0700</pubDate>
+      
+      <guid>https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/</guid>
+      <description>Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.</description>
+    </item>
+    
+  </channel>
+</rss>

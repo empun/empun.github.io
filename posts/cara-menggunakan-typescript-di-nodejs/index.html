@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cara Menggunakan Typescript di NodeJS | EMPUN | A DEV BLOG 🐱</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.">
+<meta name="author" content="Empun">
+<link rel="canonical" href="https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.9f1d947375927e9847272b1f4e9be81336f539e513bf04d52cade31f81cad1af.css" integrity="sha256-nx2Uc3WSfphHJysfTpvoEzb1OeUTvwTVLK3jH4HK0a8=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://empun.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://empun.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://empun.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://empun.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://empun.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.87.0" />
+<meta property="og:title" content="Cara Menggunakan Typescript di NodeJS" />
+<meta property="og:description" content="Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-09-09T16:58:36&#43;07:00" />
+<meta property="article:modified_time" content="2021-09-09T16:58:36&#43;07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cara Menggunakan Typescript di NodeJS"/>
+<meta name="twitter:description" content="Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://empun.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cara Menggunakan Typescript di NodeJS",
+      "item": "https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cara Menggunakan Typescript di NodeJS",
+  "name": "Cara Menggunakan Typescript di NodeJS",
+  "description": "Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Intro Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.\nTypescript ini hanya bermanfaat di masa development. Pada akhirnya nanti akan di compile (transpile) jadi Javascript.\nTL;DR baca conclusion 🔖\n Part 1 Pastikan telah menginstall node.js\nnode -v Ketikan npm init -y. Ini akan men-generate file package.json.\nnpm init -y Kurang lebih isinya akan seperti ini.\n{ \"name\": \"tutorial-install-typescript\", \"version\": \"1.0.0\", \"description\": \"\", \"main\": \"index.js\", \"scripts\": { \"test\": \"echo \\\"Error: no test specified\\\" \u0026\u0026 exit 1\" }, \"keywords\": [], \"author\": \"\", \"license\": \"ISC\" } Kemudian install typescript secara global.\nsudo npm install -g typescript Check kalau sudah ke install\ntsc --version Buat file tsconfig.json dengan mengetikan tsc --init. File ini akan berisi konfigurasi gimana project kita mau di-compile.\ntsc --init Dalam file ini ada beberapa konfigurasi penting.\n \"target\": \"es6\" . Isi aja es6. Supaya kita bisa memakai fitur seperti const, let, arrow function. \"module\": \"commonjs\". Bisa diisi commonjs atau es6. \"rootDir\": \"./src\". Dimana file-file typescript kita disimpan. \"outDir\": \"./dist\". Dimana hasil compile nya akan disimpan. \"strict\": true. Hasil compile nanti akan memakaistrict mode. \"esModuleInterop\": true. Ini supaya module ES6 bisa di compile ke module common.js \"exclude\":[\"./node_modules\"]. Diisi array directory mana saja yang gak akan ikut ke-compile.  Ini adalah isi dari tsconfig.json yang kita buat. Settingan default bisa dihapus atau uncomment seperti bawaanya.\n{ \"compilerOptions\": { \"target\": \"es6\", \"module\": \"commonjs\", \"outDir\": \"./dist\", \"rootDir\": \"./src\", \"strict\": true, \"esModuleInterop\": true, }, \"exclude\":[ \"./node_modules\" ] } Sekarang kita buat directory src. Didalamnya kita buat file index.ts.\nmkdir ./src \u0026\u0026 cd src \u0026\u0026 touch index.ts Isi dengan typescript tentunya. Contohnya seperti ini\nfunction sum(val1: number, val2: number){ return val1 + val2; } console.log(sum(12, 7)) Seharusnya kita sekarang sudah mempunyai folder structure seperti ini.\nJalankan perintah tsc. Perintah ini akan meng-compile file index.ts dalam directory src ke dalam directory dist. Seperti konfigurasi yang telah kita buat sebelumnya.\ntsc Hasilnya akan akan ada file baru di folder dist, bernama index.js.\nTentu saja isinya seperti file Javascript pada umumnya 🐱.\n\"use strict\"; function sum(val1, val2) { return val1 + val2; } console.log(sum(12, 7)); Tinggal di run aja file index.js nya\nnode dist/index.js 19  Part 2 Sampai sini kita sudah bisa install typescript, bikin konfigurasinya, lalu di transpile ke Javascript. Problemnya tiap kita ubah file dalam src, kita harus ngetikan command tsc lagi, biar di terjemahin ke Javascript. Baru setelah itu kita run file .js-nya.\nSupaya lebih mudah kita akan install typescript executor bernama ts-node. Package ini akan meng-eksekusi file typescript, tanpa perlu compile ke javascript.\nSebelumnya kita sudah install typescript secara global. Khusus untuk install package ini, kita juga harus install typescript di local project kita juga.\nnpm install -D typescript Baru deh install ts-node. Install secara local pakai -D.\nsudo npm install -D ts-node Tambahin script berikut di file package.json untuk ngejalanin ts-node nya.\n\"scripts\": { \"start\": \"ts-node ./src/index.ts\" },  ✏️ Note: Langkah ini optional. Kalau sebelumnya ts-node nya di install secara global pakai sudo npm install -G ts-node, sebenarnya kita bisa langsung jalanin ts-nodenya di command line. Contoh :\nts-node ./src/index.ts  Sekarang harusnya file package.json kita isinya seperti ini.\n{ \"name\": \"tutorial-install-typescript\", \"version\": \"1.0.0\", \"description\": \"\", \"main\": \"index.js\", \"scripts\": { \"start\": \"ts-node ./src/index.ts\" }, \"keywords\": [], \"author\": \"\", \"license\": \"ISC\", \"devDependencies\": { \"ts-node\": \"^10.2.1\" \"typescript\": \"^4.4.2\" }, \"dependencies\": { \"express\": \"^4.17.1\" } } Sekarang ketika membuat perubahan di file ./src/index.ts kita tinggal jalanin npm start.\nnpm start 19  Part 3 Sampai sini kita sudah bisa menggunakan typescript. Selanjutnya kita akan coba memakai fitur type checking dari typescript. Pada contoh ini kita akan menggunakanya pada library express.js.\nPertama pastikan kita install @types/node. Kenapa install ini ?. Packages dari Node.js ditulis dalam javascript (ingat typescript hanya digunakan dalam tahap development, bukan production). Supaya mendapatkan type definition untuk node kita install @types untuk node.\nnpm install -D @types/node Nah, untuk menggunakan type definition dari library express.js kita juga perlu install type definition untuk express.js.\nnpm install express npm install -D @types/express Harusnya isi package.json bagian devDependencies nya sudah berubah seperti ini.\n\"devDependencies\": { \"@types/express\": \"^4.17.13\", \"@types/node\": \"^16.9.0\", \"ts-node\": \"^10.2.1\", \"typescript\": \"^4.4.2\" }  ✏️ Note : Tidak semua library mempunyai type definition. Untuk mengeceknya check aja di npm.js. Contoh untuk library express dia mempunyai type definition. Ditandai dengan icon DT\nLibrary yang tidak punya tanda DT, artinya dia tidak punya type definition. Dan biasanya ketika di import akan muncul compile error. Untuk me-handle-nya (me-ignore-nya), bisa check question ini di stack overflow. Cuma ubah tsconfig.json dikit. Dan jangan khawatir, kebanyakan library populer sudah menyertakan type definition.\n Sekarang kita ubah file ./src/index.ts. Coba fitur library express nya.\nimport express, { Request, Response, Application } from 'express'; const app: Application = express(); const PORT = process.env.PORT || 3000; app.get(\"/\", (req: Request, res: Response): void = { res.send(\"Lah udah ke kirim aja 🌵\"); }); app.listen(PORT, (): void = { console.log(`Listening on 👉 https://localhost:${PORT}`); }); Terkesan agak ribet emang. Misal pada baris 3, kita harus sertakan tipe Application untuk variabel app. Pada baris 6 kita harus sertakan tipe Response untuk variabel res.\nTapi ini akan sangat membantu begitu project kita bertambah besar, selain itu kita juga bisa lebih mengenal library yang ktia pakai dengan mengetahui tipe parameter atau tipe nilai kembalian dari suatu function. 👏 🔥. Kalau yang biasa ngoding Java atau C# malah ngerasa nyaman sih. 🌳\nSekarang coba kita run. npm start\nnpm start  tutorial-install-typescript@1.0.0 start /Users/xxxx/Desktop/tutorial-install-typescript  ts-node ./src/index.ts Listening on 👉 https://localhost:3000 Contoh response :\nSebelumnya saya sudah hapus folder ./dist nya. Karena kita sudah pakai ts-node tidak ada lagi folder ./dist yang di generate ketika kita nge run npm start. Karena dia langsung nge-eksekusi file typescript-nya.\n ✏️ Notes : Supaya otomatis reload tanpa perlu jalanin npm start. Kita juga bisa install nodemon atau ts-node-dev.\n1️⃣ Install ts-node-dev\nKetikan perintah berikut.\nnpm install -D ts-node-dev Edit bagian scripts di file package.json.\n\"scripts\": { \"start\": \"ts-node ./src/index.ts\", \"dev1\": \"ts-node-dev --respawn ./src/index.ts\" } Tinggal run scriptnya.\nnpm run dev1 2️⃣ Install nodemon\nKetikan perintah berikut.\nnpm install -D nodemon Sama seperti sebelumnya. Disini saya kasih nama dev2.\n\"scripts\": { \"start\": \"ts-node ./src/index.ts\", \"dev1\": \"ts-node-dev --respawn ./src/index.ts\", \"dev2\": \"nodemon ./src/index.ts\" } Jalanin script nya.\nnpm run dev2 Pilih salah satu. Keduanya sama, tinggal ubah bagian scripts di package.json.\n Conclusion   Typescript membantu proses development. Kita di beritahu tipe data apa yang harus dimasukan sebagai parameter, apa yang harus di return, dan menampilkan error pada saat kompilasi. Membuat Javascript yang bersifat dynamic typing menjadi bahasa yang berasa static typing seperti Java dkk.\n  Typescript akan di compile atau istilahnya disini di transpile jadi Javascript. Jadi yang di-running tetap kode Javascript.\n  Quick Steps\n 1️⃣ npm init -y sudo npm install -g typescript tsc –init 👉 bakal ada tsconfig.json, setting file ini mkdir ./src \u0026\u0026 cd src \u0026\u0026 touch index.ts\t👉 isi dengan typescript tsc\t👉 bakal nge nge-compile jadi javascript node dist/index.js\t👉 jalanin javascript 2️⃣ npm install -D typescript 👉 install di local project, khusus buat jalanin ts-node npm install -D ts-node 👉 package biar langsung eksekusi typescriptnya, tanpa nge compile 👉 setting dikit package.json nya npm start 👉 jalanin ts-node sesuai settingan package.json nya 3️⃣ npm install -D @types/node npm install express npm install -D @types/express 👉 buat kodingan express nya npm start   🌵 Written with ❤️ by : https://github.com/empun\n ",
+  "wordCount" : "1254",
+  "inLanguage": "en",
+  "datePublished": "2021-09-09T16:58:36+07:00",
+  "dateModified": "2021-09-09T16:58:36+07:00",
+  "author":{
+    "@type": "Person",
+    "name": "Empun"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://empun.github.io/posts/cara-menggunakan-typescript-di-nodejs/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EMPUN | A DEV BLOG 🐱",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://empun.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://empun.github.io/" accesskey="h" title="EMPUN | A DEV BLOG 🐱 (Alt + H)">EMPUN | A DEV BLOG 🐱</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://empun.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://empun.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/empun" title="Github">
+                    <span>Github</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://empun.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://empun.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://empun.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Cara Menggunakan Typescript di NodeJS
+    </h1>
+    <div class="post-meta">September 9, 2021&nbsp;·&nbsp;Empun
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#intro" aria-label="Intro">Intro</a></li>
+                <li>
+                    <a href="#part-1" aria-label="Part 1">Part 1</a></li>
+                <li>
+                    <a href="#part-2" aria-label="Part 2">Part 2</a></li>
+                <li>
+                    <a href="#part-3" aria-label="Part 3">Part 3</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="intro">Intro<a hidden class="anchor" aria-hidden="true" href="#intro">#</a></h2>
+<p>Bagi yang berlatang belakang mepakai bahasa pemrograman seperti Java atau C# memasuki dunia Javascript mungkin memberi sedikit nuansa berbeda. Javascript adalah bahasa yang dynamic typing yang tidak memberikan fitur type cheking. Intinya dia gak peduli apakah isinya string atau number atau yang lain. Sekarang diisi string nanti diisi array, gak akan ada notif, erronya muncul pas di compile. Nah biar ada notif dan nggak salah tipe data pas masukin ke parameter, atau nge-return sebuah function, kita pakai Typescript.</p>
+<p>Typescript ini hanya bermanfaat di masa development. Pada akhirnya nanti akan di compile (transpile) jadi Javascript.</p>
+<p>TL;DR baca <a href="#conclusion">conclusion</a> 🔖</p>
+<hr>
+<h2 id="part-1">Part 1<a hidden class="anchor" aria-hidden="true" href="#part-1">#</a></h2>
+<p>Pastikan telah menginstall node.js</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node -v
+</code></pre></div><p>Ketikan <code>npm init -y</code>. Ini akan men-generate file <code>package.json</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm init -y
+</code></pre></div><p>Kurang lebih isinya akan seperti ini.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;tutorial-install-typescript&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;test&#34;</span>: <span style="color:#e6db74">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+  },
+  <span style="color:#f92672">&#34;keywords&#34;</span>: [],
+  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>
+}
+</code></pre></div><p>Kemudian install <code>typescript</code> secara global.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo npm install -g typescript
+</code></pre></div><p>Check kalau sudah ke <code>install</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tsc --version
+</code></pre></div><p>Buat file <code>tsconfig.json</code> dengan mengetikan <code>tsc --init</code>. File ini akan berisi konfigurasi gimana project kita mau di-compile.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tsc --init
+</code></pre></div><p>Dalam file ini ada beberapa konfigurasi penting.</p>
+<ul>
+<li><code>&quot;target&quot;: &quot;es6&quot;</code> . Isi aja <code>es6</code>. Supaya kita bisa memakai fitur seperti <code>const</code>, <code>let</code>, <code>arrow function</code>.</li>
+<li><code>&quot;module&quot;: &quot;commonjs&quot;</code>.  Bisa diisi <code>commonjs</code>  atau <code>es6</code>.</li>
+<li><code>&quot;rootDir&quot;: &quot;./src&quot;</code>. Dimana file-file typescript kita disimpan.</li>
+<li><code>&quot;outDir&quot;: &quot;./dist&quot;</code>. Dimana hasil compile nya akan disimpan.</li>
+<li><code>&quot;strict&quot;: true</code>. Hasil compile nanti akan memakai<code>strict mode</code>.</li>
+<li><code>&quot;esModuleInterop&quot;: true</code>. Ini supaya module ES6 bisa di compile ke module common.js</li>
+<li><code>&quot;exclude&quot;:[&quot;./node_modules&quot;]</code>. Diisi array directory mana saja yang gak akan ikut ke-compile.</li>
+</ul>
+<p>Ini adalah isi dari <code>tsconfig.json</code> yang kita buat. Settingan default bisa dihapus atau uncomment seperti bawaanya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {                        
+    <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;es6&#34;</span>,                               
+    <span style="color:#f92672">&#34;module&#34;</span>: <span style="color:#e6db74">&#34;commonjs&#34;</span>,                           
+    <span style="color:#f92672">&#34;outDir&#34;</span>: <span style="color:#e6db74">&#34;./dist&#34;</span>,                             
+    <span style="color:#f92672">&#34;rootDir&#34;</span>: <span style="color:#e6db74">&#34;./src&#34;</span>,                             
+    <span style="color:#f92672">&#34;strict&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;esModuleInterop&#34;</span>: <span style="color:#66d9ef">true</span>,                       
+  },
+  <span style="color:#f92672">&#34;exclude&#34;</span>:[
+    <span style="color:#e6db74">&#34;./node_modules&#34;</span>
+  ]
+}
+</code></pre></div><p>Sekarang kita buat directory <code>src</code>. Didalamnya kita buat file <code>index.ts</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir ./src <span style="color:#f92672">&amp;&amp;</span> cd src <span style="color:#f92672">&amp;&amp;</span> touch index.ts
+</code></pre></div><p>Isi dengan typescript tentunya. Contohnya seperti ini</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">val1</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">val2</span>: <span style="color:#66d9ef">number</span>){
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">val1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">val2</span>;
+}
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">7</span>))
+</code></pre></div><p>Seharusnya kita sekarang sudah mempunyai <code>folder structure</code> seperti ini.</p>
+<p><img loading="lazy" src="/1-folder-structure.png" alt="folder-structure"  />
+</p>
+<p>Jalankan perintah <code>tsc</code>. Perintah ini akan meng-compile file <code>index.ts</code> dalam directory <code>src</code> ke dalam directory <code>dist</code>. Seperti konfigurasi yang telah kita buat sebelumnya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tsc
+</code></pre></div><p>Hasilnya akan akan ada file baru di folder <code>dist</code>, bernama <code>index.js</code>.</p>
+<p><img loading="lazy" src="/1-folder-structure-2.png" alt="folder-structure"  />
+
+Tentu saja isinya seperti file Javascript pada umumnya 🐱.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#34;use strict&#34;</span>;
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">val1</span>, <span style="color:#a6e22e">val2</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">val1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">val2</span>;
+}
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">sum</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">7</span>));
+</code></pre></div><p>Tinggal di run aja file <code>index.js</code> nya</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node dist/index.js
+<span style="color:#ae81ff">19</span>
+</code></pre></div><hr>
+<h2 id="part-2">Part 2<a hidden class="anchor" aria-hidden="true" href="#part-2">#</a></h2>
+<p>Sampai sini kita sudah bisa install typescript, bikin konfigurasinya, lalu di <code>transpile</code> ke Javascript. Problemnya tiap kita ubah file dalam <code>src</code>, kita harus ngetikan command <code>tsc</code> lagi, biar di terjemahin ke Javascript. Baru setelah itu kita run file <code>.js</code>-nya.</p>
+<p>Supaya lebih mudah kita akan install typescript executor bernama <code>ts-node</code>. Package ini akan meng-eksekusi file typescript, tanpa perlu compile ke javascript.</p>
+<p>Sebelumnya kita sudah install typescript secara global. Khusus untuk install package ini, kita juga harus install typescript di local project kita juga.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install -D typescript 
+</code></pre></div><p>Baru deh install <code>ts-node</code>. Install secara local pakai <code>-D</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo npm install -D ts-node  
+</code></pre></div><p>Tambahin script berikut di file <code>package.json</code> untuk ngejalanin <code>ts-node</code> nya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> <span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+    <span style="color:#f92672">&#34;start&#34;</span>: <span style="color:#e6db74">&#34;ts-node ./src/index.ts&#34;</span>
+  }<span style="color:#960050;background-color:#1e0010">,</span>
+</code></pre></div><hr>
+<p>✏️   Note: Langkah ini optional. Kalau sebelumnya <code>ts-node</code> nya di install secara global pakai <code>sudo npm install -G ts-node</code>, sebenarnya kita bisa langsung jalanin <code>ts-node</code>nya di command line. Contoh :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ts-node ./src/index.ts
+</code></pre></div><hr>
+<p>Sekarang harusnya file <code>package.json</code> kita isinya seperti ini.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;tutorial-install-typescript&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;start&#34;</span>: <span style="color:#e6db74">&#34;ts-node ./src/index.ts&#34;</span>
+  },
+  <span style="color:#f92672">&#34;keywords&#34;</span>: [],
+  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;ts-node&#34;</span>: <span style="color:#e6db74">&#34;^10.2.1&#34;</span>
+    <span style="color:#e6db74">&#34;typescript&#34;</span>: <span style="color:#e6db74">&#34;^4.4.2&#34;</span>
+  },
+  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;express&#34;</span>: <span style="color:#e6db74">&#34;^4.17.1&#34;</span>
+  }
+}
+</code></pre></div><p>Sekarang ketika membuat perubahan di file <code>./src/index.ts</code>  kita tinggal jalanin <code>npm start</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm start
+
+<span style="color:#ae81ff">19</span>
+</code></pre></div><hr>
+<h2 id="part-3">Part 3<a hidden class="anchor" aria-hidden="true" href="#part-3">#</a></h2>
+<p>Sampai sini kita sudah bisa menggunakan typescript. Selanjutnya kita akan coba memakai fitur <code>type checking</code> dari typescript. Pada contoh ini kita akan menggunakanya pada library <code>express.js</code>.</p>
+<p>Pertama pastikan kita install <code>@types/node</code>. Kenapa install ini ?.  Packages dari Node.js ditulis dalam javascript (ingat typescript hanya digunakan dalam tahap development, bukan production). Supaya mendapatkan <code>type definition</code> untuk <code>node</code> kita install <code>@types</code> untuk <code>node</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install -D @types/node
+</code></pre></div><p>Nah, untuk menggunakan <code>type definition</code> dari library <code>express.js</code> kita juga perlu install <code>type definition</code> untuk <code>express.js</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install express
+npm install -D @types/express
+</code></pre></div><p>Harusnya isi <code>package.json</code> bagian <code>devDependencies </code>nya sudah berubah seperti ini.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;devDependencies&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+  <span style="color:#f92672">&#34;@types/express&#34;</span>: <span style="color:#e6db74">&#34;^4.17.13&#34;</span>,
+  <span style="color:#f92672">&#34;@types/node&#34;</span>: <span style="color:#e6db74">&#34;^16.9.0&#34;</span>,
+  <span style="color:#f92672">&#34;ts-node&#34;</span>: <span style="color:#e6db74">&#34;^10.2.1&#34;</span>,
+  <span style="color:#f92672">&#34;typescript&#34;</span>: <span style="color:#e6db74">&#34;^4.4.2&#34;</span>
+}
+</code></pre></div><hr>
+<p>✏️ Note : Tidak semua library mempunyai <code>type definition</code>. Untuk mengeceknya check aja di <a href="https://www.npmjs.com/">npm.js</a>. Contoh untuk library <a href="https://www.npmjs.com/package/express">express</a> dia mempunyai <code>type definition</code>. Ditandai dengan icon <strong>DT</strong></p>
+<p><img loading="lazy" src="/1-express-dt.png" alt="express-dt"  />
+</p>
+<p>Library yang tidak punya tanda <strong>DT</strong>, artinya dia tidak punya <code>type definition</code>. Dan biasanya ketika di import akan muncul compile error. Untuk me-handle-nya (me-ignore-nya), bisa check question ini di <a href="https://stackoverflow.com/questions/47388560/typescript-what-to-do-if-module-doesnt-have-types">stack overflow</a>. Cuma ubah <code>tsconfig.json</code> dikit. Dan jangan khawatir, kebanyakan library populer sudah menyertakan <code>type definition</code>.</p>
+<hr>
+<p>Sekarang kita ubah file <code>./src/index.ts</code>. Coba fitur library express nya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">express</span>, { <span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">Response</span>, <span style="color:#a6e22e">Application</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;express&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span>: <span style="color:#66d9ef">Application</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PORT</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PORT</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">3000</span>;
+
+<span style="color:#a6e22e">app</span>.<span style="color:#66d9ef">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (<span style="color:#a6e22e">req</span>: <span style="color:#66d9ef">Request</span>, <span style="color:#a6e22e">res</span>: <span style="color:#66d9ef">Response</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Lah udah ke kirim aja 🌵&#34;</span>);
+});
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">PORT</span>, ()<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Listening on 👉 https://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">PORT</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+});
+</code></pre></div><p>Terkesan agak ribet emang. Misal pada baris 3, kita harus sertakan tipe <code>Application</code> untuk variabel <code>app</code>. Pada baris 6 kita harus sertakan tipe <code>Response</code> untuk variabel <code>res</code>.</p>
+<p>Tapi ini akan sangat membantu begitu project kita bertambah besar, selain itu kita juga bisa lebih mengenal library yang ktia pakai dengan mengetahui tipe parameter atau tipe nilai kembalian dari suatu function.  👏 🔥. Kalau yang biasa ngoding Java atau C# malah ngerasa nyaman sih. 🌳</p>
+<p>Sekarang coba kita run. <code>npm start</code></p>
+<pre><code class="language-bash" data-lang="bash">npm start
+
+&gt; tutorial-install-typescript@1.0.0 start /Users/xxxx/Desktop/tutorial-install-typescript
+&gt; ts-node ./src/index.ts
+
+Listening on 👉 https://localhost:3000
+</code></pre><p>Contoh response :</p>
+<p><img loading="lazy" src="/1-response-example.png" alt="image-20210909103409583"  />
+</p>
+<p>Sebelumnya saya sudah hapus folder <code>./dist</code> nya. Karena kita sudah pakai <code>ts-node</code> tidak ada lagi folder <code>./dist</code> yang di generate ketika kita nge run <code>npm start</code>. Karena dia langsung nge-eksekusi file typescript-nya.</p>
+<hr>
+<p>✏️ <strong>Notes :</strong>
+<br>
+Supaya otomatis reload tanpa perlu jalanin <code>npm start</code>. Kita juga bisa install <code>nodemon</code> atau <code>ts-node-dev</code>.</p>
+<p>1️⃣ <strong>Install ts-node-dev</strong></p>
+<p>Ketikan perintah berikut.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install -D ts-node-dev
+</code></pre></div><p>Edit bagian <code>scripts</code> di file <code>package.json</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+    <span style="color:#f92672">&#34;start&#34;</span>: <span style="color:#e6db74">&#34;ts-node ./src/index.ts&#34;</span>,
+    <span style="color:#f92672">&#34;dev1&#34;</span>: <span style="color:#e6db74">&#34;ts-node-dev --respawn ./src/index.ts&#34;</span>
+}
+</code></pre></div><p>Tinggal run scriptnya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run dev1
+</code></pre></div><p>2️⃣ <strong>Install nodemon</strong></p>
+<p>Ketikan perintah berikut.</p>
+<pre><code>npm install -D nodemon
+</code></pre><p>Sama seperti sebelumnya. Disini saya kasih nama <code>dev2</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;scripts&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+    <span style="color:#f92672">&#34;start&#34;</span>: <span style="color:#e6db74">&#34;ts-node ./src/index.ts&#34;</span>,
+    <span style="color:#f92672">&#34;dev1&#34;</span>: <span style="color:#e6db74">&#34;ts-node-dev --respawn ./src/index.ts&#34;</span>,
+  	<span style="color:#f92672">&#34;dev2&#34;</span>: <span style="color:#e6db74">&#34;nodemon ./src/index.ts&#34;</span>
+}
+</code></pre></div><p>Jalanin <code>script</code> nya.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run dev2
+</code></pre></div><p>Pilih salah satu. Keduanya sama, tinggal ubah bagian scripts di <code>package.json</code>.</p>
+<hr>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<ul>
+<li>
+<p>Typescript membantu proses development. Kita di beritahu tipe data apa yang harus dimasukan sebagai parameter, apa yang harus di return, dan menampilkan error pada saat kompilasi. Membuat Javascript yang bersifat <code>dynamic typing</code> menjadi bahasa yang berasa <code>static typing</code> seperti Java dkk.</p>
+</li>
+<li>
+<p>Typescript akan di compile atau istilahnya disini di <code>transpile</code> jadi Javascript. Jadi yang di-running tetap kode Javascript.</p>
+</li>
+</ul>
+<p><strong>Quick Steps</strong></p>
+<ul>
+<li>1️⃣</li>
+<li>npm init -y</li>
+<li>sudo npm install -g typescript</li>
+<li>tsc &ndash;init 👉 bakal ada tsconfig.json, setting file ini</li>
+<li>mkdir ./src &amp;&amp; cd src &amp;&amp; touch index.ts	👉 isi dengan typescript</li>
+<li>tsc	👉 bakal nge nge-compile jadi javascript</li>
+<li>node dist/index.js	👉 jalanin javascript</li>
+<li>2️⃣</li>
+<li>npm install -D typescript 	👉 install di local project, khusus buat jalanin ts-node</li>
+<li>npm install -D ts-node  	👉 package biar langsung eksekusi typescriptnya, tanpa nge compile</li>
+<li>👉 setting dikit package.json nya</li>
+<li>npm start 	👉 jalanin ts-node sesuai settingan package.json nya</li>
+<li>3️⃣</li>
+<li>npm install -D @types/node</li>
+<li>npm install express</li>
+<li>npm install -D @types/express</li>
+<li>👉 buat kodingan express nya</li>
+<li>npm start</li>
+</ul>
+<hr>
+<p>🌵 Written with ❤️ by : <a href="https://github.com/empun">https://github.com/empun</a></p>
+<hr>
+
+
+  </div>
+
+  <footer class="post-footer">
+
+  </footer><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "empun" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://empun.github.io/">EMPUN | A DEV BLOG 🐱</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
